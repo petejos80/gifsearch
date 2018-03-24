@@ -1,6 +1,6 @@
 // GLOBAL VARIABLES
 // =============================================================================================
-
+var subject;
 
 function searchGiphy(searchQuery) {
 // queryURL for Giphy API
@@ -11,20 +11,18 @@ function searchGiphy(searchQuery) {
         method: "GET"
     }).then(function (response) {
         console.log(response);
-        appendSearchQuery(searchQuery);
     });
 };
 
 function appendSearchQuery() {
-    $("#searchedTerms").appendTo("o");
-    console.log("bananas");
+    $("#searchedTerms").append("<button>" + subject + "</button> &nbsp;");
 }
  
 $("#go").on("click", function(event) {
     // Preventing button from submitting form
     event.preventDefault();
     // Storing the artist name
-    var subject = $("#searchInput").val().trim();
+    subject = $("#searchInput").val().trim();
     searchGiphy(subject);
-    $("#searchedTerms").append("#searchInput");
+    appendSearchQuery();
 });

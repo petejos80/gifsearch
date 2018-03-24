@@ -44,6 +44,12 @@ img {
   border: 1px solid #ddd;
 }
 
+button {
+  padding: 5px;
+  margin: 5px;
+  /* border-radius: 6px; */
+}
+
 /* Container formatting */
 .container {
   padding-top: 20px;
