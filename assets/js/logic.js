@@ -22,12 +22,6 @@ function searchGiphy(searchQuery) {
     });
 };
 
-// If the search query field is empty, alert the user
-// function appendSearchQuery() {
-//     if (subject !== "")
-//     $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button> &nbsp;");
-// };
-
 // Check that the search query field isn't empty
 function formValidation() {
     if (subject == "") {
@@ -36,6 +30,9 @@ function formValidation() {
     } else {
         if (subject !== "")
     $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button> &nbsp;");
+
+    // If field is not empty, run the function to perform a Giphy search
+    searchGiphy(subject);
     }
 };
 
@@ -51,6 +48,5 @@ $("#go").on("click", function(event) {
     event.preventDefault();
     // Storing the artist name
     subject = $("#searchInput").val().trim();
-    searchGiphy(subject);
     formValidation();
 });
