@@ -23,18 +23,21 @@ function searchGiphy(searchQuery) {
 };
 
 // If the search query field is empty, alert the user
-function appendSearchQuery() {
-    if (subject !== "")
-    $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button> &nbsp;");
-};
+// function appendSearchQuery() {
+//     if (subject !== "")
+//     $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button> &nbsp;");
+// };
 
-// Make sure the search query field isn't empty
+// Check that the search query field isn't empty
 function formValidation() {
     if (subject == "") {
-        alert("Enter a Valid Roll Number");
+        alert("Please enter a valid search term");
         return false;
-    };
-}
+    } else {
+        if (subject !== "")
+    $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button> &nbsp;");
+    }
+};
 
 
 
@@ -50,5 +53,4 @@ $("#go").on("click", function(event) {
     subject = $("#searchInput").val().trim();
     searchGiphy(subject);
     formValidation();
-    appendSearchQuery();
 });
