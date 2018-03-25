@@ -59,6 +59,14 @@ img {
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22) !important;
 }
 
+.search-well {
+  margin-top: 20px;
+}
+
+img {
+  display: inline;
+}
+
 /* Panel formatting */
 .panel{
     border: none;

@@ -26,10 +26,14 @@ function searchGiphy(searchQuery) {
 
     var foodDiv = $("#gifArea");
 
+    // Creating a paragraph tag with the result item's rating
+    var p = $("<p>").text("Rating: " + results[i].rating);
+
     var foodImage = $("<img>");
 
     foodImage.attr("src", response.data[i].images.fixed_width.url);
 
+    foodDiv.append(p);
     foodDiv.append(foodImage);
 
     }
