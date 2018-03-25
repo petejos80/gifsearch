@@ -44,9 +44,9 @@ img {
   border: 1px solid #ddd;
 }
 
-button {
+.btn-light {
   padding: 5px;
-  margin: 10px;
+  margin: 5px;
   /* border-radius: 6px; */
 }
 
