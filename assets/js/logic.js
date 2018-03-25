@@ -8,8 +8,7 @@ var inputText;
 
 function searchGiphy(searchQuery) {
   // queryURL for Giphy API
-  var queryURL =
-    "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=9";
 
   $.ajax({
     url: queryURL,
@@ -17,15 +16,19 @@ function searchGiphy(searchQuery) {
   }).then(function(response) {
     console.log(response);
 
-    var animalDiv = $("#gifArea");
+    var results = response.data;
 
-    var animalImage = $("<img>");
+    for (var i = 0; i < results.length; i++) {
 
-    animalImage.attr("src", response.data[0].images.preview_gif.url);
+    var foodDiv = $("#gifArea");
 
-    animalDiv.append(animalImage);
+    var foodImage = $("<img>");
 
+    foodImage.attr("src", response.data[i].images.fixed_width.url);
 
+    foodDiv.append(foodImage);
+
+    }
   });
 }
 
@@ -36,14 +39,15 @@ function formValidation() {
     return false;
   } else {
     if (subject !== "")
-      $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button>"
-      );
+      $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button>");
 
-    // If field is not empty, run the function to perform a Giphy search then clear the field.
-    searchGiphy(subject);
+    // Clear text in field
     $("form").trigger("reset");
   }
 }
+
+
+
 
 // GAMEPLAY
 // =============================================================================================
