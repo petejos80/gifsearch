@@ -7,6 +7,10 @@ var inputText;
 // =============================================================================================
 
 function searchGiphy(searchQuery) {
+  
+  // Clear existing Gifs from gifArea
+  $("#gifArea").empty();
+
   // queryURL for Giphy API
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=9";
 
@@ -29,7 +33,7 @@ function searchGiphy(searchQuery) {
     foodDiv.append(foodImage);
 
     }
-  });
+  }); 
 }
 
 // Check that the search query field isn't empty
@@ -39,12 +43,24 @@ function formValidation() {
     return false;
   } else {
     if (subject !== "")
-      $("#searchedTerms").append("<button type='button' class='btn btn-light'>" + subject + "</button>");
+      $("#searchedTerms").append("<button type='button' id='bananas' onClick='searchGiphy(subject)' class='btn btn-light'>" + subject + "</button>");
 
     // Clear text in field
     $("form").trigger("reset");
   }
 }
+
+function reply_click(clicked_id)
+{
+    alert(clicked_id);
+}
+
+// function bananaClick() {
+// $("#bananas").on("click", function() {
+//     console.log("Hello");
+// });
+
+// }
 
 
 
@@ -59,3 +75,4 @@ $("#go").on("click", function(event) {
   subject = $("#searchInput").val().trim();
   formValidation();
 });
+

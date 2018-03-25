@@ -24,28 +24,39 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="col-md-8">
-                                    <div id="gifArea"></div>
+                                    <div id="gifArea">
+
+                                    </div>
                                 </div>
 
 
                                 <div class="col-md-4">
                                     <div class="well">
-                                        
-                                        
 
-                                            <form class="form-inline">
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="searchInput" class="sr-only">Search for GIFs</label>
-                                                    <input type="text" class="form-control" id="searchInput" maxlength="18" pattern="[a-z]" placeholder="Search for GIFs...">
-                                                </div>
-                                                <button type="submit" id="go" class="btn btn-primary mb-2">Go</button>
-                                            </form>
+
+
+                                        <form class="form-inline">
+                                            <div class="form-group mx-sm-3 mb-2">
+                                                <label for="searchInput" class="sr-only">Search for GIFs</label>
+                                                <input type="text" class="form-control" id="searchInput" maxlength="18" pattern="[a-z]" placeholder="Search for GIFs...">
+                                            </div>
+                                            <button type="submit" id="go" class="btn btn-primary mb-2">Go</button>
+                                        </form>
 
 
                                     </div>
                                     <div class="panel panel-default" id="searchedPanel">
                                         <div class="well">
-                                            <div id="searchedTerms"></div>
+                                            <div id="searchedTerms">
+                                                <button type='button' id='bananas' onClick='searchGiphy("Peppers")' class='btn btn-light'>Peppers</button>
+                                                <button type='button' id='bananas' onClick='searchGiphy("Bananas")' class='btn btn-light'>Bananas</button>
+                                                <button type='button' id='bananas' onClick='searchGiphy("Cilantro")' class='btn btn-light'>Cilantro</button>
+                                                <button type='button' id='bananas' onClick='searchGiphy("Tuna")' class='btn btn-light'>Tuna</button>
+                                                <button type='button' id='bananas' onClick='searchGiphy("Oranges")' class='btn btn-light'>Oranges</button>
+                                                <button type='button' id='bananas' onClick='searchGiphy("Celery")' class='btn btn-light'>Celery</button>
+                                                <button type='button' id='bananas' onClick='searchGiphy("Asparagus")' class='btn btn-light'>Asparagus</button>
+                                                <button type='button' id='bananas' onClick='searchGiphy("Artichokes")' class='btn btn-light'>Artichokes</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
