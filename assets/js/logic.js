@@ -36,6 +36,19 @@ function searchGiphy(searchQuery) {
 
     foodImage.attr({src: response.data[i].images.fixed_height_still.url, class: 'gif'});
 
+    $(foodDiv).on('click', '.gif', function() {
+      var src = $(this).attr("src");
+    if($(this).hasClass('playing')){
+       //stop
+       $(this).attr('src', src.replace(/\.gif/i, "_s.gif"))
+       $(this).removeClass('playing');
+    } else {
+      //play
+      $(this).addClass('playing');
+      $(this).attr('src', src.replace(/\_s.gif/i, ".gif"))
+    }
+  });
+
     foodDiv.append(p);
     foodDiv.append(foodImage);
 
