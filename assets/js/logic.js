@@ -24,7 +24,7 @@ function searchGiphy(searchQuery) {
 
     for (var i = 0; i < results.length; i++) {
 
-    var foodDiv = $("#gifArea");
+    var foodDiv = $("<div class='item'>");
 
     // Creating a paragraph tag with the result item's rating
     var p = $("<p>").text("Rating: " + results[i].rating);
@@ -35,6 +35,10 @@ function searchGiphy(searchQuery) {
 
     foodDiv.append(p);
     foodDiv.append(foodImage);
+
+    // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
+    $("#gifArea").prepend(foodDiv);
+
 
     }
   }); 
