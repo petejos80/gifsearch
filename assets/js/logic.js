@@ -31,7 +31,10 @@ function searchGiphy(searchQuery) {
 
     var foodImage = $("<img>");
 
-    foodImage.attr("src", response.data[i].images.fixed_width.url);
+    // foodImage.attr("src", response.data[i].images.fixed_height_still.url);
+    // foodImage.attr("class", "gif");
+
+    foodImage.attr({src: response.data[i].images.fixed_height_still.url, class: 'gif'});
 
     foodDiv.append(p);
     foodDiv.append(foodImage);
