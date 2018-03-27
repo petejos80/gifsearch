@@ -55,7 +55,6 @@ function searchGiphy(searchQuery) {
     // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
     $("#gifArea").prepend(foodDiv);
 
-
     }
   }); 
 }
@@ -78,15 +77,6 @@ function reply_click(clicked_id)
 {
     alert(clicked_id);
 }
-
-// function bananaClick() {
-// $("#bananas").on("click", function() {
-//     console.log("Hello");
-// });
-
-// }
-
-
 
 
 // GAMEPLAY
