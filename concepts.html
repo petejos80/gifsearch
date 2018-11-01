@@ -7,54 +7,26 @@
 <!--------------------------------------------------------------------------------------------->
 
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
-
-    <!-- Document title -->
-    <title>GIF Search</title>
-</head>
-
 <body>
-    <main> 
-        <!-- This is the area that get's populated with GIFS -->
-        <div class="col-md-8">
-            <div id="gifArea"></div>
-        </div>
+    
+    <div>
+        <div id="gifArea"></div> <!-- Area where gifs will appear -->
+    </div>
 
-        <!-- This is the input form for searching/adding GIFS -->
-        <div class="col-md-4 search-well"></div>
-            <div class="well">
-                <form class="form-inline">
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label for="searchInput" class="sr-only">Search for GIFs</label>
-                        <input type="text" class="form-control" id="searchInput" maxlength="18" pattern="[a-z]" placeholder="Search for GIFs...">
-                    </div>
-                    <button type="submit" id="go" class="btn btn-primary mb-2">Go</button>
-                </form>
-            </div>
 
-        <!-- This is the area that holds the search button history -->
-        <div class="col-md-4 search-well" id="searchedPanel">
-            <div class="well">
-                <div id="searchedTerms">
-                    <button type='button' id='bananas' onClick='searchGiphy("Peppers")' class='btn btn-light'>Peppers</button>
-                </div>
-            </div>
-        </div>
-    </main>
+    <form>
+        
+        <div>
+            <input type="text" id="searchInput" placeholder="Search for GIFs..."> <!-- Search box -->
+        </div>    
 
-<!-- Scripts -->
+        <button type="submit" id="go" class="btn btn-primary mb-2">Go</button> <!-- Search button-->
+    
+    </form>
+
+<!-- Scripts - Remember to import JQuery! -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
 
@@ -80,20 +52,23 @@ var searchQuery;
 // FUNCTIONS
 // =============================================================================================
 
-function searchGiphy(searchQuery) {
+function searchGiphy() {
+
+    // Clear existing Gifs from gifArea
+    $("#gifArea").empty();
 
     // Capture the value from search input field
     searchQuery = $("#searchInput").val().trim();
 
-    // Submit the AJAX request using the template and query from below
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=9";
+    // Submit the AJAX request using the AJAX template and query from below
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=3";
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
     
-    // Set the value of response equal to 'results' variable
+    // Set the value of the response equal to 'results' variable
     var results = response.data;
 
     // Use for loops function to iterate through images object
@@ -101,8 +76,6 @@ function searchGiphy(searchQuery) {
         $("#gifArea").append("<img src="+ results[i].images.fixed_height.url + ">");
     }
 
-    console.log(searchGiphy(banana))
-  
   }); 
 }
 
@@ -118,6 +91,9 @@ $("#go").on("click", function(event) {
 
   // Invoke function that makes API request
   searchGiphy(searchQuery)
+
+  // Clear text in field
+  $("form").trigger("reset");
 
 });
 
