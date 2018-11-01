@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+
+    <!-- Document title -->
+    <title>GIF Search</title>
+</head>
+
+<body>
+    <main> 
+        <!-- This is the area that get's populated with GIFS -->
+        <div class="col-md-8">
+            <div id="gifArea"></div>
+        </div>
+
+        <!-- This is the input form for searching/adding GIFS -->
+        <div class="col-md-4 search-well">
+            <div class="well">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="searchInput" class="sr-only">Search for GIFs</label>
+                        <input type="text" class="form-control" id="searchInput" maxlength="18" pattern="[a-z]" placeholder="Search for GIFs...">
+                    </div>
+                    <button type="submit" id="go" class="btn btn-primary mb-2">Go</button>
+                </form>
+            </div>
+
+        <!-- This is the area that holds the search button history -->
+        <div class="col-md-4 search-well" id="searchedPanel">
+            <div class="well">
+                <div id="searchedTerms">
+                    <button type='button' id='bananas' onClick='searchGiphy("Peppers")' class='btn btn-light'>Peppers</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+
+<script>
+
+// GLOBAL VARIABLES
+// =============================================================================================
+var subject;
+var inputText;
+
+// FUNCTIONS
+// =============================================================================================
+
+function searchGiphy(searchQuery) {
+  
+  // Clear existing Gifs from gifArea
+  $("#gifArea").empty();
+
+  // queryURL for Giphy API
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=9";
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function(response) {
+    console.log(response);
+
+    var results = response.data;
+
+    for (var i = 0; i < results.length; i++) {
+
+    var foodDiv = $("<div class='item'>");
+
+    // Creating a paragraph tag with the result item's rating
+    var p = $("<p>").text("Rating: " + results[i].rating);
+
+    var foodImage = $("<img>");
+
+    foodImage.attr({src: response.data[i].images.fixed_height_still.url, class: 'gif'});
+
+    $(foodDiv).on('click', '.gif', function() {
+      var src = $(this).attr("src");
+    if($(this).hasClass('playing')){
+       //stop
+       $(this).attr('src', src.replace(/\.gif/i, "_s.gif"))
+       $(this).removeClass('playing');
+    } else {
+      //play
+      $(this).addClass('playing');
+      $(this).attr('src', src.replace(/\_s.gif/i, ".gif"))
+    }
+  });
+
+    foodDiv.append(p);
+    foodDiv.append(foodImage);
+
+    // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
+    $("#gifArea").prepend(foodDiv);
+
+    }
+  }); 
+}
+
+// Check that the search query field isn't empty
+function formValidation() {
+  if (subject == "") {
+    alert("Please enter a valid search term");
+    return false;
+  } else {
+    if (subject !== "")
+      $("#searchedTerms").append("<button type='button' id='bananas' onClick='searchGiphy(subject)' class='btn btn-light'>" + subject + "</button>");
+
+    // Clear text in field
+    $("form").trigger("reset");
+  }
+}
+
+function reply_click(clicked_id)
+{
+    alert(clicked_id);
+}
+
+
+// GAMEPLAY
+// =============================================================================================
+
+$("#go").on("click", function(event) {
+  // Preventing button from submitting form
+  event.preventDefault();
+  // Storing the artist name
+  subject = $("#searchInput").val().trim();
+  formValidation();
+});
+
+</script>
