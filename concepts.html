@@ -1,27 +1,15 @@
-<!--------------------------------------------------------------------------------------------->
-<!--                                                                                         -->
-<!--                                ▒█░▒█ ▀▀█▀▀ ▒█▀▄▀█ ▒█░░░                                 -->  
-<!--                                ▒█▀▀█ ░▒█░░ ▒█▒█▒█ ▒█░░░                                 -->  
-<!--                                ▒█░▒█ ░▒█░░ ▒█░░▒█ ▒█▄▄█                                 -->  
-<!--                                                                                         -->                                                                       
-<!--------------------------------------------------------------------------------------------->
-
 <!DOCTYPE html>
 <body>
-    
-    <div>
-        <div id="gifArea"></div> <!-- Area where gifs will appear -->
-    </div>
 
+    <!-- Area where gifs will appear -->
+    <div id="gifArea"></div>
 
     <form>
-        
-        <div>
-            <input type="text" id="searchInput" placeholder="Search for GIFs..."> <!-- Search box -->
-        </div>    
+        <!-- Search box --> 
+        <input type="text" id="searchInput" placeholder="Search for GIFs...">  
 
-        <button type="submit" id="go" class="btn btn-primary mb-2">Go</button> <!-- Search button-->
-    
+        <!-- Search button-->
+        <button type="submit" id="go" class="btn btn-primary mb-2">Go</button>
     </form>
 
 <!-- Scripts - Remember to import JQuery! -->
@@ -32,25 +20,20 @@
 
 
 
-<!--------------------------------------------------------------------------------------------->
-<!--                                                                                         -->
-<!--            ░░░▒█ ░█▀▀█ ▒█░░▒█ ░█▀▀█ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀█ ▀█▀ ▒█▀▀█ ▀▀█▀▀                  -->
-<!--            ░▄░▒█ ▒█▄▄█ ░▒█▒█░ ▒█▄▄█ ░▀▀▀▄▄ ▒█░░░ ▒█▄▄▀ ▒█░ ▒█▄▄█ ░▒█░░                  -->  
-<!--            ▒█▄▄█ ▒█░▒█ ░░▀▄▀░ ▒█░▒█ ▒█▄▄▄█ ▒█▄▄█ ▒█░▒█ ▄█▄ ▒█░░░ ░▒█░░                  -->                                                                            
-<!--                                                                                         -->
-<!--------------------------------------------------------------------------------------------->
+
+
+
 
 <script>
 
 // GLOBAL VARIABLES
-// =============================================================================================
-var subject;
+// ====================================================================================
 var inputText;
 var searchQuery;
 
 
 // FUNCTIONS
-// =============================================================================================
+// ====================================================================================
 
 function searchGiphy() {
 
@@ -71,7 +54,7 @@ function searchGiphy() {
     // Set the value of the response equal to 'results' variable
     var results = response.data;
 
-    // Use for loops function to iterate through images object
+    // Use for-loops function to iterate through the images object
     for (var i = 0; i < results.length; i++) {
         $("#gifArea").append("<img src="+ results[i].images.fixed_height.url + ">");
     }
@@ -81,19 +64,19 @@ function searchGiphy() {
 
 
 // GAMEPLAY
-// =============================================================================================
+// ====================================================================================
 
 // The #go id is attached to the HTML submit button, which runs the functions below when clicked.
 $("#go").on("click", function(event) {
   
-  // Always necessary - prevents button from submitting form
-  event.preventDefault();
+    // Always necessary - prevents button from submitting form
+    event.preventDefault();
 
-  // Invoke function that makes API request
-  searchGiphy(searchQuery)
+    // Invoke function that makes API request
+    searchGiphy(searchQuery)
 
-  // Clear text in field
-  $("form").trigger("reset");
+    // Clear text in field
+    $("form").trigger("reset");
 
 });
 
