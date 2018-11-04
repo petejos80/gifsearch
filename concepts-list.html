@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<body>
+
+    <!-- Area where gifs will appear -->
+    <div>
+        <ul id="gifArea">
+
+        </ul>
+    </div>
+
+    <form>
+        <!-- Search box --> 
+        <input type="text" id="searchInput" placeholder="Search for GIFs...">  
+
+        <!-- Search button-->
+        <button type="submit" id="go" class="btn btn-primary mb-2">Go</button>
+    </form>
+
+<!-- Scripts - Remember to import JQuery! -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+<script>
+
+// GLOBAL VARIABLES
+// ====================================================================================
+var inputText;
+var searchQuery;
+
+
+// FUNCTIONS
+// ====================================================================================
+
+function searchGiphy() {
+
+    // Clear existing Gifs from gifArea
+    $("#gifArea").empty();
+
+    // Capture the value from search input field
+    searchQuery = $("#searchInput").val().trim();
+
+    // Submit the AJAX request using the AJAX template and query from below
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=3";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response) {
+    
+    // Set the value of the response equal to 'results' variable
+    var results = response.data;
+    console.log(results)
+
+    // Use for-loops function to iterate through the images object
+    for (var i = 0; i < results.length; i++) {
+        $("#gifArea").append("<li>Gif URL: " + results[i].url + "</li>");
+    }
+
+  }); 
+}
+
+
+// GAMEPLAY
+// ====================================================================================
+
+// The #go id is attached to the HTML submit button, which runs the functions below when clicked.
+$("#go").on("click", function(event) {
+  
+    // Always necessary - prevents button from submitting form
+    event.preventDefault();
+
+    // Invoke function that makes API request
+    searchGiphy(searchQuery)
+
+    // Clear text in field
+    $("form").trigger("reset");
+
+});
+
+</script>
