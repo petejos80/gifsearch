@@ -41,14 +41,13 @@ function searchGiphy() {
     // Clear existing Gifs from gifArea
     $("#gifArea").empty();
 
-    // Capture the value from search input field
-    searchQuery = $("#searchInput").val().trim();
-
     // Submit the AJAX request using the AJAX template and query from below
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=3";
+    var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=2UZRAKebFpIBB3Q5RhMHCWc5Clb8vDU4&limit=3";
+
+    console.log(queryUrl)
 
     $.ajax({
-        url: queryURL,
+        url: queryUrl,
         method: "GET"
     }).then(function(response) {
     
@@ -78,8 +77,9 @@ $("#go").on("click", function(event) {
     // Always necessary - prevents button from submitting form
     event.preventDefault();
 
-    // Invoke function that makes API request
-    searchGiphy(searchQuery)
+    // Capture the value from search input field
+    searchQuery = $("#searchInput").val().trim();
+    console.log(searchQuery)
 
     // Clear text in field
     $("form").trigger("reset");
@@ -96,10 +96,11 @@ $(document).on("click", "#search", function(event) {
   // Always necessary - prevents button from submitting form
   event.preventDefault();
 
+  var searchQuery = $("#search").val();
+  console.log(searchQuery)
+
   // Invoke function that makes API request
   searchGiphy(searchQuery);
-
-  console.log('Hello!')
 
   // Clear text in field
   $("form").trigger("reset");
