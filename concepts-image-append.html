@@ -3,6 +3,7 @@
 
     <!-- Area where gifs will appear -->
     <div id="gifArea"></div>
+    <div id="buttonArea"></div>
 
     <form>
         <!-- Search box --> 
@@ -63,6 +64,9 @@ function searchGiphy() {
         $("#gifArea").append("<p>" + results[i].rating + "</p>")
         $("#gifArea").append("<img src=" + results[i].images.fixed_height.url + ">");
     }
+    
+    // Append the search term to a new button
+    ("#buttonArea").append("<button>" + searchQuery + "</button>");
 
   }); 
 }
