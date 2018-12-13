@@ -83,6 +83,9 @@ $("#go").on("click", function(event) {
 
     // Clear text in field
     $("form").trigger("reset");
+        
+    // Append the search term to a new button
+    $("#buttonArea").append("<button id='search'>" + searchQuery + "</button>");
 
 });
 
